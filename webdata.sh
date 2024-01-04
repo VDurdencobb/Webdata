@@ -29,7 +29,6 @@ IP_number(){
 Gen_Info(){
     echo "[-] Generando documentación..."
     touch "$info_doc_name" 
-        # se puede introducir ruta 
     echo -e "[+] La IP de $REPLY es: $IP\n" > $info_doc_name
     whois $IP >> $info_doc_name
     sleep 1
@@ -37,7 +36,6 @@ Gen_Info(){
 
 Gen_Sum(){
     touch "$sum_doc_name"
-        # se puede introducir ruta 
     echo -e "[+] La IP de $REPLY es: $IP\n" > $sum_doc_name
     for i in $key_word_IP
     do
@@ -47,9 +45,8 @@ Gen_Sum(){
 }
 
 Gen_Domain_info(){
-    touch "Domain_info_$domain_name.txt"
-        # se puede introducir ruta 
-    whois $REPLY > "Domain_info_$domain_name.txt"
+    touch $dom_info_name
+    whois $REPLY > $dom_info_name
     
 }
 
@@ -81,8 +78,12 @@ case $n in
 
         key_word_IP=("OrgName Address City State PostalCode country Phone Email mail")
         domain_name=$(echo $REPLY | awk '{print $1}' FS=".")
-        info_doc_name="IP_Info_$domain_name.txt"
-        sum_doc_name="IP_Sum_$domain_name.txt"
+        info_doc_name="/tmp/IP_Info_$domain_name.txt"
+            # se puede cambiar la ruta
+        sum_doc_name="/tmp/IP_Sum_$domain_name.txt"
+            # se puede cambiar la ruta
+        dom_info_name="/tmp/Domain_info_$domain_name.txt"
+            # se puede cambiar la ruta
         Exec_URL
         echo "[+] Documentación generada con exito"
     ;;
@@ -91,8 +92,12 @@ case $n in
 
         key_word_IP=("OrgName Address City State PostalCode country Phone Email mail")
         domain_name=$(echo $REPLY)
-        info_doc_name="IP_Info_$domain_name.txt"
-        sum_doc_name="IP_Sum_$domain_name.txt"
+        info_doc_name="/tmp/IP_Info_$domain_name.txt"
+            # se puede cambiar la ruta
+        sum_doc_name="/tmp/IP_Sum_$domain_name.txt"
+            # se puede cambiar la ruta
+        dom_info_name="/tmp/Domain_info_$domain_name.txt"
+            # se puede cambiar la ruta
         Exec_IP
         echo "[+] Documentación generada con exito"
     ;;
